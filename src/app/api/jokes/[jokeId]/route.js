@@ -1,16 +1,11 @@
 import connectToDatabase from '@/lib/mongodb';
 import Joke from '@/models/Joke';
-import { verifyApiKey } from '@/lib/apiAuth';
 
 export async function GET(request, { params }) {
     try {
-        //sec
-        if (!verifyApiKey(request)) {
-            return Response.json({ success: false, error: 'Unauthorized' }, { status: 401 });
-        }
-
         await connectToDatabase();
-        const joke = await Joke.findById(params.jokeId);
+        const { jokeId } = await params;
+        const joke = await Joke.findById(jokeId);
 
         if (!joke) {
             return Response.json({ success: false, error: 'Joke not found' }, { status: 404 });
@@ -26,11 +21,6 @@ export async function GET(request, { params }) {
 }
 
 export async function PATCH(request, { params }) {
-    //sec
-    if (!verifyApiKey(request)) {
-        return Response.json({ success: false, error: 'Unauthorized' }, { status: 401 });
-    }
-
     try {
 
         await connectToDatabase();
@@ -56,11 +46,6 @@ export async function PATCH(request, { params }) {
 }
 
 export async function DELETE(request, { params }) {
-    //sec
-    if (!verifyApiKey(request)) {
-        return Response.json({ success: false, error: 'Unauthorized' }, { status: 401 });
-    }
-
     try {
         //sec
         const { valid, error } = validateRequest(request);

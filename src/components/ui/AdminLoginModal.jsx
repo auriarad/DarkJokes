@@ -4,14 +4,39 @@ import DefaultButton from './DefaultButton';
 import styles from '@/styles/modal.module.css';
 import formStyles from '@/styles/Form.module.css'
 import { X } from 'lucide-react';
+import { useState } from 'react';
 
 export default function AdminLoginModal({ onClose }) {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [loginError, setLoginError] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const onSubmit = data => {
-        console.log(data);
-    }
+    const onSubmit = async (data) => {
+        try {
+            setLoading(true);
+            setLoginError('')
+            const response = await fetch('/api/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            setLoading(false)
+            if (response.ok) {
+                // onClose();
+                window.location.reload();
+            } else {
+                setLoginError(result.error || 'התחברות נכשלה');
+            }
+        } catch (error) {
+            // console.error('Login error:', error);
+            setLoginError('נראה כאילו משהו השתבש');
+        }
+    };
+
 
     const outPressed = (e) => {
         if (e.target.id === 'overlay') {
@@ -59,8 +84,10 @@ export default function AdminLoginModal({ onClose }) {
                             <span className={formStyles.errorMessage}>{errors.password.message}</span>
                         )}
                     </div>
-                    <DefaultButton type="submit" variant='steel'>התחבר</DefaultButton>
-
+                    {loginError &&
+                        <span className={formStyles.errorMessage}>{loginError}</span>
+                    }
+                    <DefaultButton type="submit" variant='steel'>{loading ? 'מחבר...' : 'התחבר'}</DefaultButton>
                 </form>
             </div>
         </div>

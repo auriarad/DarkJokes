@@ -1,5 +1,6 @@
 import styles from "@/styles/navBarButtons.module.css";
 import Link from 'next/link';
+import { LayoutDashboard, LogOut } from 'lucide-react';
 
 export const AddNewButton = () => {
     return (
@@ -29,7 +30,7 @@ export const AddNewButton = () => {
 
 export const RandomButton = () => {
     return (
-        <Link href="/random" className={styles.random}>
+        <Link href="/jokes/random" className={styles.random}>
             <svg
                 className={styles.randomIcon}
                 viewBox="27 34 190 190"
@@ -93,3 +94,21 @@ export const HomeButton = () => {
         </Link>
     );
 };
+
+export const AdminLogoutButton = ({ func }) => {
+    return (
+        <button onClick={func} className={styles.BLogout}>
+            <LogOut className={styles.Logout} />
+        </button>
+
+    )
+}
+
+export const AdminPageLink = () => {
+    return (
+        <Link href='/admin' className={styles.BAdminPage}>
+            <LayoutDashboard className={styles.AdminPage} />
+        </Link>
+
+    )
+}

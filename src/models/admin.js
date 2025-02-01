@@ -13,6 +13,9 @@ const adminSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    sessionToken: {
+        type: String
+    }
 });
 
 
