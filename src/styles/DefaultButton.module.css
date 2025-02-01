@@ -1,0 +1,140 @@
+.button {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 17px 45px;
+
+    background-color: initial;
+    background-image: none;
+    position: relative;
+    z-index: 0;
+
+    border-style: none;
+    color: #fff;
+    font-family: 'Abraham';
+    font-size: 18px;
+    font-weight: 400;
+
+    line-height: 24px;
+    cursor: pointer;
+
+}
+
+.button:before,
+.button:after {
+    border-radius: 80px;
+}
+
+.button:before {
+    content: "";
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    z-index: -2;
+}
+
+.button:after {
+    content: "";
+    display: block;
+    left: 4px;
+    bottom: 4px;
+    right: 4px;
+    top: 4px;
+    position: absolute;
+    transition: all 100ms ease-out;
+    z-index: -1;
+}
+
+
+.button:hover:not(:disabled):after {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    transition-timing-function: ease-in;
+    opacity: 0;
+}
+
+
+.button:disabled {
+    cursor: default;
+    opacity: .24;
+}
+
+/*variants: blue,orange, steel,purple,teal,black*/
+
+/*  Metallic Blue */
+.blue:before {
+    background-image: linear-gradient(92.83deg, #2a4a6d 0%, #152238 100%);
+}
+
+.blue:after {
+    background-image: linear-gradient(rgba(42, 74, 109, 0.4) 0%, rgba(12, 13, 15, 0.8) 100%);
+}
+
+.blue:hover:not(:disabled):before {
+    filter: brightness(1.2) contrast(1.1);
+}
+
+/* Fiery Orange*/
+.orange:before {
+    background-image: linear-gradient(92.83deg, #ff7426 0%, #f93a13 100%);
+}
+
+.orange:after {
+    background-image: linear-gradient(rgba(84, 26, 15, 0.8) 0%, rgba(12, 13, 13, 0.9) 100%);
+}
+
+/* Cyber Steel */
+.steel:before {
+    background-image: linear-gradient(135deg, #3a4a5c 0%, #1a232e 100%);
+}
+
+.steel:after {
+    background-image: linear-gradient(rgba(78, 104, 128, 0.4) 0%, rgba(12, 13, 15, 0.8) 100%);
+}
+
+.steel:hover:not(:disabled):before {
+    filter: brightness(1.15) contrast(1.1);
+}
+
+/* Plasma Purple */
+.purple:before {
+    background-image: linear-gradient(92.83deg, #6d3bce 0%, #3d1a6b 100%);
+}
+
+.purple:after {
+    background-image: linear-gradient(rgba(109, 59, 206, 0.4) 0%, rgba(18, 12, 33, 0.8) 100%);
+}
+
+.purple:hover:not(:disabled):after {
+    opacity: 0.5;
+}
+
+/* Toxic Teal */
+.teal:before {
+    background-image: linear-gradient(92.83deg, #2faea7 0%, #1c5f5b 100%);
+}
+
+.teal:after {
+    background-image: linear-gradient(rgba(47, 174, 167, 0.3) 0%, rgba(12, 24, 23, 0.7) 100%);
+}
+
+.teal:hover:not(:disabled):before {
+    box-shadow: 0 0 12px rgba(47, 174, 167, 0.4);
+}
+
+/* Obsidian Black */
+.black:before {
+    background-image: linear-gradient(135deg, #2a2a2a 0%, #0c0d0d 100%);
+}
+
+.black:after {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.black:hover:not(:disabled):before {
+    filter: brightness(1.25);
+}

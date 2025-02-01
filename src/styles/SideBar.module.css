@@ -1,0 +1,78 @@
+.container {
+    margin-left: 15px;
+    display: block;
+    width: 30%;
+    background-color: #1e2936;
+    border-radius: 20px;
+    padding: 18px;
+
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+}
+
+.form input,
+.form select {
+    margin-bottom: 1.5rem;
+    font-family: 'Abraham';
+    color: aliceblue;
+    border: 1px solid white;
+    padding: 3px;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    background-color: #30336f;
+    width: 100%;
+}
+
+.form span {
+    display: flex;
+    align-items: start;
+}
+
+.form input {
+    padding: 8px;
+    width: 100%;
+}
+
+.form select {}
+
+.reverse {
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+    margin-right: 4px;
+    background: none;
+    border: none;
+    color: white
+}
+
+.reverse:hover {
+    cursor: pointer;
+}
+
+::placeholder {
+    color: aliceblue;
+}
+
+.categoriesGrid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    justify-content: start;
+    justify-items: start;
+}
+
+.categoriesGrid button {
+    font-family: 'Abraham';
+    background: none;
+    border: none;
+}

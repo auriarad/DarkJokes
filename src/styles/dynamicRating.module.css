@@ -1,0 +1,42 @@
+.container {
+    flex: 0 0 80px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container p {
+    margin: 0;
+    margin-bottom: 4px;
+    font-size: 1.5em;
+}
+
+.voteButton {
+    height: 35px;
+    width: 35px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    fill: #575f6c;
+}
+
+.voteButton.upVote:hover,
+.fullUpVote:hover {
+    fill: green
+}
+
+.voteButton.downVote:hover,
+.fullDownVote:hover {
+    fill: red
+}
+
+.fullUpVote {
+    fill: rgba(0, 128, 0, 0.575);
+}
+
+.fullDownVote {
+    fill: rgba(255, 0, 0, 0.548);
+}

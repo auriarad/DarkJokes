@@ -1,0 +1,39 @@
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: lowercase;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid;
+
+
+}
+
+.badge:hover {
+    transform: scale(1.05);
+}
+
+
+.default {
+    color: #ffffff;
+    border-color: rgba(108, 99, 255, 0.3);
+    background-color: rgba(108, 99, 255, 0.15);
+}
+
+.default:hover {
+    background-color: rgba(107, 99, 255, 0.322);
+}
+
+.choosen {
+    color: #ffffff;
+    border-color: #162b228a;
+    background-color: #4999787c;
+}
+
+.choosen:hover {
+    background-color: #b0da7a7c;
+}

@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    font-family: 'Abraham';
+    background: linear-gradient(to right, #111828 0%, #111828 100%);
+    color: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 1400px) {
+    main {
+        margin: auto;
+        width: 70%;
+    }
+}

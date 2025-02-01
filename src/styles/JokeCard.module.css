@@ -1,0 +1,55 @@
+.jokeContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+
+    border: 1px solid #ccc;
+    padding: 10px;
+    padding-top: 0px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    background-color: #101724;
+}
+
+.jokeContainer:hover {
+    background-color: #19212e73;
+}
+
+.jokeTitle {
+    margin: 5px;
+    font-size: 1.3em;
+    font-weight: 400;
+}
+
+.categoryList {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.collapse {
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    margin-top: 5px;
+    white-space: pre-wrap;
+    transition: all 0.5s ease;
+}
+
+.collapse.show {
+    visibility: visible;
+    opacity: 1;
+    max-height: 1000px;
+}
+
+.staticRating {
+    flex: 0 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
