@@ -26,7 +26,6 @@ export const JokeCard = ({ joke }) => {
             // Optimistic update
             const previousVote = userVote;
             setUserVote(voteType === userVote ? "" : voteType);
-
             const newRating = currentRating + calculateRatingChange(previousVote, voteType);
             setCurrentRating(newRating);
 

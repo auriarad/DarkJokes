@@ -1,0 +1,32 @@
+.titleEdit {
+    background: none;
+    color: white;
+    border-radius: 15px;
+    font-family: 'Abraham';
+    font-size: 1.6em;
+    width: 100%;
+}
+
+.bodyEdit {
+    background: none;
+    color: white;
+    border-radius: 15px;
+    font-family: 'Abraham';
+    width: 100%;
+    font-size: 1.4em;
+}
+
+.ButtonGroup {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+
+}
+
+.errorMessage {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}

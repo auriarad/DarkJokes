@@ -5,10 +5,12 @@
     padding: 20px 0px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: start;
 }
 
-.jokeDetails {}
+.jokeDetails {
+    width: 85%;
+}
 
 .jokeDetails h1 {
     font-size: 1.7em;
@@ -17,4 +19,17 @@
 .jokeDetails p {
     font-size: 1.4em;
     white-space: pre-wrap;
+}
+
+.rating {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
 }

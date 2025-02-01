@@ -4,7 +4,7 @@ import { LayoutDashboard, LogOut } from 'lucide-react';
 
 export const AddNewButton = () => {
     return (
-        <Link href={'jokes/new'} className={styles.addNew}>
+        <Link href='/jokes/new' className={styles.addNew}>
             <svg
                 className={styles.newIcon}
                 width="24px"

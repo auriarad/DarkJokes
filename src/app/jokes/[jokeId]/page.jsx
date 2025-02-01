@@ -1,6 +1,7 @@
 import connectToDatabase from '@/lib/mongodb';
 import Joke from '@/models/Joke';
 import JokeDetails from '@/components/jokes/JokeDetails';
+import { notFound } from 'next/navigation';
 
 export default async function JokePage({ params }) {
     const body = await params;
@@ -8,7 +9,7 @@ export default async function JokePage({ params }) {
     const joke = await Joke.findById(body.jokeId);
 
     if (!joke) {
-        return <div>Joke not found!</div>;
+        notFound();
     }
 
     return (
