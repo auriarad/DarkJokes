@@ -59,7 +59,7 @@
     cursor: pointer;
 }
 
-::placeholder {
+.form input::placeholder {
     color: aliceblue;
 }
 

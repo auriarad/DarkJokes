@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 import { categories } from '../../public/categories';
+import Comment from './comment';
+const { Schema } = mongoose;
 
-const jokeSchema = new mongoose.Schema({
+const jokeSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -29,18 +31,27 @@ const jokeSchema = new mongoose.Schema({
             }
         }
     ],
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ],
     createdAt: {
         type: Date,
         default: Date.now,
     },
 
-    //   approved: {
-    //     type: Boolean,
-    //     default: false,
-    //   },
+    approved: {
+        type: Boolean,
+        default: false,
+    },
 });
 
-
-
+jokeSchema.post('findOneAndDelete', async function (joke) {
+    if (joke.comments.length) {
+        await Comment.deleteMany({ _id: { $in: joke.comments } })
+    }
+})
 
 export default mongoose.models.Joke || mongoose.model('Joke', jokeSchema);

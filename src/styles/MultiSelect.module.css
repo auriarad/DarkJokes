@@ -110,3 +110,8 @@
     color: #dc3745;
     font-size: 0.85em;
 }
+
+.input::placeholder,
+.textarea::placeholder {
+    color: rgba(255, 255, 255, 0.425);
+}

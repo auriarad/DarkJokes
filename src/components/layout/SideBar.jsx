@@ -55,6 +55,7 @@ export default function SideBar({ handleSearch }) {
                         <option value="" >ברירת מחדל</option>
                         <option value="createdAt">תאריך</option>
                         <option value="rating">דירוג</option>
+                        <option value="comments">תגובות</option>
                     </select>
                     <button
                         type="button"

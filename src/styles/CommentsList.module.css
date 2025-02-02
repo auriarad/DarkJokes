@@ -1,0 +1,95 @@
+.commentCard {
+    width: 80%;
+    padding: 0px 10px;
+    border-bottom: 1px rgba(255, 255, 255, 0.459) solid;
+    border-radius: 4px;
+    color: rgba(194, 194, 194, 0.884);
+}
+
+.cardTitle {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.commentName {
+    margin: 0;
+    font-size: 1.3em;
+}
+
+.commentBody {
+    margin: 7px;
+    font-size: 1em;
+    font-style: italic;
+}
+
+
+.trashBtn {
+    background: none;
+    border: none;
+    color: #ee4e4e9c;
+    margin-left: 5px;
+    margin-right: auto;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.2s ease;
+}
+
+.trashBtn svg {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trashBtn:hover:not(:disabled) {
+    transform: scale(1.05);
+}
+
+.trashBtn:hover:not(:disabled) svg {
+    color: #ee4e4e;
+    animation: trashShake 0.4s ease-in-out infinite;
+}
+
+.trashBtn:active {
+    transform: scale(0.95);
+}
+
+.trashBtn:active svg {
+    animation: none;
+    color: #ff2222;
+}
+
+.trashBtn:disabled {
+    color: #8149498a;
+}
+
+.trashBtn:disabled:hover {
+    cursor: default;
+}
+
+@keyframes trashShake {
+    0% {
+        transform: rotate(0deg) scale(1.1);
+    }
+
+    25% {
+        transform: rotate(5deg) scale(1.1);
+    }
+
+    50% {
+        transform: rotate(-5deg) scale(1.1);
+    }
+
+    75% {
+        transform: rotate(5deg) scale(1.1);
+    }
+
+    100% {
+        transform: rotate(0deg) scale(1.1);
+    }
+}
+
+.errorMessage {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}

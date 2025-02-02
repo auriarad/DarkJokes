@@ -33,10 +33,14 @@ export const NewForm = () => {
             });
 
             if (!response.ok) {
-                throw new Error('אופס... נראה שיש תקלה :( תנסה בבקשה שוב');
+                throw new Error('אופס.. נראה שיש תקלה :( תנסה בבקשה שוב');
             }
 
-            sessionStorage.setItem('jokeSubmissionSuccess', 'true');
+            const responseData = await response.json()
+
+            if (!responseData.admin) {
+                sessionStorage.setItem('jokeSubmissionSuccess', 'true');
+            }
             router.push('/');
         } catch (error) {
             setSubmitError('אופס... נראה שיש תקלה :( תנסה בבקשה שוב');

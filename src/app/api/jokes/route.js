@@ -1,5 +1,7 @@
 import connectToDatabase from '@/lib/mongodb';
 import Joke from '@/models/Joke';
+import { getAdminSession } from '@/lib/session';
+import Admin from '@/models/admin';
 
 
 export async function GET(request) {
@@ -13,6 +15,8 @@ export async function GET(request) {
         const search = searchParams.get('search') || '';
         const categories = searchParams.get('categories') ? searchParams.get('categories').split(',') : [];
 
+        const approved = searchParams.get('approved') || 'true';
+
         const query = {};
         if (search) {
             const searchRegex = new RegExp(search, 'i');
@@ -24,11 +28,48 @@ export async function GET(request) {
         if (categories.length > 0) {
             query.categories = { $in: categories };
         }
-        console.log(sort, sortOrder);
-        const jokes = await Joke.find(query)
-            .sort({ [sort]: sortOrder, '_id': -1 })
-            .skip(skip)
-            .limit(10);
+        if (approved === 'false') {
+            const session = await getAdminSession(request.cookies.get('adminSession')?.value);
+            if (!session?.adminId) {
+                return Response.json({ success: false, error: "נו באמת לא חשבת שזה יהיה כזה קל" }, { status: 401 });
+            }
+            const admin = await Admin.findById(session.adminId);
+            if (!admin) {
+                return Response.json({ success: false, error: "נו באמת לא חשבת שזה יהיה כזה קל" }, { status: 401 });
+            }
+            query.approved = false;
+        } else {
+            query.approved = true;
+        }
+
+        let jokes = null;
+        if (sort === "comments") {
+            const sortByNum = sortOrder === 'descending' ? -1 : 1
+            console.log(sortByNum)
+
+            jokes = await Joke.aggregate([
+                { $match: query },
+                {
+                    $addFields: {
+                        commentsLength: { $size: "$comments" }
+                    }
+                },
+                {
+                    $sort: {
+                        commentsLength: sortByNum,
+                        _id: -1
+                    }
+                },
+                { $skip: skip },
+                { $limit: 10 }
+            ]);
+        }
+        else {
+            jokes = await Joke.find(query)
+                .sort({ [sort]: sortOrder, '_id': -1 })
+                .skip(skip)
+                .limit(10);
+        }
 
         return Response.json(jokes, { status: 200 });
 
@@ -43,6 +84,18 @@ export async function GET(request) {
 
 export async function POST(request) {
     try {
+        let approved = false
+        //check admin
+        const session = await getAdminSession(request.cookies.get('adminSession')?.value);
+        if (session?.adminId) {
+            const admin = await Admin.findById(session.adminId);
+            if (!!admin) {
+                approved = true;
+            }
+        }
+
+
+
         await connectToDatabase();
         const { title, body, categories } = await request.json();
 
@@ -50,10 +103,11 @@ export async function POST(request) {
             title,
             body,
             categories,
+            approved,
         });
 
         await newJoke.save();
-        return Response.json({ success: true, joke: newJoke }, { status: 201 });
+        return Response.json({ success: true, admin: approved, joke: newJoke }, { status: 201 });
     } catch (error) {
         if (error.message === 'Too many requests') {
             return Response.json({ error: 'Rate limit exceeded' }, { status: 429 });

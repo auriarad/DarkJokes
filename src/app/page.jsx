@@ -6,7 +6,7 @@ import JokeList from '@/components/jokes/JokesList';
 
 export default async function Home() {
   await connectToDatabase();
-  const initialJokes = await Joke.find({})
+  const initialJokes = await Joke.find({ approved: true })
     .sort({ _id: -1 })
     .limit(10);
 

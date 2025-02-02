@@ -2,10 +2,10 @@
 import { useState, useEffect } from 'react';
 import styles from '@/styles/JokeDetails.module.css'
 import { DynamicRating } from '@/components/jokes/DynamicRating';
-import { handleVote } from "@/utils/voteService";
+import { handleVote, getClientId } from "@/utils/voteService";
 import useAdmin from '@/hooks/useAdmin';
 import DefaultButton from '../ui/DefaultButton';
-import { EditForm } from './EditForm';
+import { EditForm } from './AdminUi/EditForm';
 import { useRouter } from 'next/navigation'
 
 export default function JokeDetails({ joke }) {
@@ -23,7 +23,7 @@ export default function JokeDetails({ joke }) {
     const router = useRouter()
 
     useEffect(() => {
-        const clientId = localStorage.getItem('clientId');
+        const clientId = getClientId();
         const existingVote = joke.voters?.find(v => v.clientId === clientId);
         setUserVote(existingVote?.voteType || "");
     }, [joke.voters]);

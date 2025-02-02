@@ -23,6 +23,10 @@
     font-weight: 400;
 }
 
+.jokeBody {
+    margin: 2px 0px;
+}
+
 .categoryList {
     display: flex;
     gap: 8px;
@@ -52,4 +56,54 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.errorMessage {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.cardButtom {
+    margin-top: 7px;
+    display: flex;
+    align-items: center;
+}
+
+.commentCount {
+    margin-right: 15px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.link {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    padding: 4px 8px;
+    font-size: 18px;
+    transition: font-weight 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+.link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #313370;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-in-out;
+}
+
+.link:hover {
+    font-weight: bold;
+    transform: scale(1.05);
+    color: #0056b3;
+}
+
+.link:hover::after {
+    width: 0;
 }

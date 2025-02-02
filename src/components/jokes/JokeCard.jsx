@@ -4,8 +4,8 @@ import styles from "@/styles/JokeCard.module.css"
 import Link from 'next/link';
 import CategoryBadge from "./CategoriesBadge";
 import { DynamicRating } from "./DynamicRating";
-import { handleVote } from "@/utils/voteService";
-
+import { handleVote, getClientId } from "@/utils/voteService";
+import { MessageCircle } from "lucide-react";
 export const JokeCard = ({ joke }) => {
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -14,7 +14,7 @@ export const JokeCard = ({ joke }) => {
 
     // Check existing votes on mount
     useEffect(() => {
-        const clientId = localStorage.getItem('clientId');
+        const clientId = getClientId();
         const existingVote = joke.voters?.find(v => v.clientId === clientId);
         setUserVote(existingVote?.voteType || "");
     }, [joke.voters]);
@@ -72,9 +72,22 @@ export const JokeCard = ({ joke }) => {
                 <h2 className={styles.jokeTitle}>{joke.title}</h2>
 
                 <div className={`${styles.collapse} ${isExpanded ? styles.show : ''}`}>
-                    {joke.body}
-                    <br />
-                    <Link href={`/jokes/${joke._id}`}>עוד</Link>
+                    <p className={styles.jokeBody}>{joke.body}</p>
+                    <div className={styles.cardButtom}>
+
+                        <Link
+                            href={`/jokes/${joke._id}`}
+                            className={styles.link}
+                        >
+                            לדף הבדיחה
+                        </Link>
+
+                        <span className={styles.commentCount}>
+                            <MessageCircle style={{ scale: "0.8" }} />
+                            {joke.comments.length}
+                        </span>
+                    </div>
+
                 </div>
 
             </div>

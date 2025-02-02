@@ -1,6 +1,6 @@
 import TextareaAutosize from 'react-textarea-autosize';
 import styles from '@/styles/EditForm.module.css'
-import DefaultButton from '../ui/DefaultButton';
+import DefaultButton from '../../ui/DefaultButton';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
