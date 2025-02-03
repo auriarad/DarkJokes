@@ -11,6 +11,7 @@ export default function AdminLoginModal({ onClose }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [loginError, setLoginError] = useState('');
     const [loading, setLoading] = useState(false);
+    const textRegex = /^[\p{L}\p{N}\p{S}\p{P}\s]+$/u;
 
     const onSubmit = async (data) => {
         try {
@@ -62,6 +63,10 @@ export default function AdminLoginModal({ onClose }) {
                             className={`${formStyles.input} ${errors.username ? formStyles.errorInput : ''}`}
                             {...register("username", {
                                 required: "חובה שם משתמש אחי",
+                                pattern: {
+                                    value: /^[\p{L}\p{N}\s]+$/u,
+                                    message: "בלי מקשים מיוחדים בבקשה"
+                                }
                             })}
                         />
                         {errors.username && (
@@ -77,6 +82,10 @@ export default function AdminLoginModal({ onClose }) {
                             className={`${formStyles.input} ${errors.password ? formStyles.errorInput : ''}`}
                             {...register("password", {
                                 required: "איך תתחבר בלי ססמא יה מפגר",
+                                pattern: {
+                                    value: /^[\p{L}\p{N}\s]+$/u,
+                                    message: "בלי מקשים מיוחדים בבקשה"
+                                }
                             })}
                         />
                         {errors.password && (

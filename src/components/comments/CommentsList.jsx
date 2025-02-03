@@ -9,8 +9,7 @@ export default function CommentsList({
     comments, hasMore, fetchMorecomments,
     endMessage, clientId, handleDelete,
     isDeleting, deleteError }) {
-    // const { isAdmin } = useAdmin()
-    const isAdmin = false
+    const { isAdmin } = useAdmin()
     return (
         <div>
             <InfiniteScroll

@@ -46,7 +46,12 @@ export const EditForm = ({ title, body, jokeId, cancelEdit, updateJokeState }) =
                     maxLength: {
                         value: 55,
                         message: "הכותרת יכולה להכיל עד 55 תווים"
+                    },
+                    pattern: {
+                        value: /^[\p{L}\p{N}\s]+$/u,
+                        message: "בלי מקשים מיוחדים בבקשה"
                     }
+
                 })}
             />
             {errors.title && (
@@ -63,7 +68,12 @@ export const EditForm = ({ title, body, jokeId, cancelEdit, updateJokeState }) =
                     maxLength: {
                         value: 300,
                         message: "גוף הבדיחה יכול להכיל עד 300 תווים"
+                    },
+                    pattern: {
+                        value: /^[\p{L}\p{N}\s]+$/u,
+                        message: "בלי מקשים מיוחדים בבקשה"
                     }
+
                 })}
             />
             {errors.body && (
