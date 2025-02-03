@@ -4,9 +4,12 @@ import comment from '@/models/comment';
 import JokeDetails from '@/components/jokes/JokeDetails';
 import { notFound } from 'next/navigation';
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { isValidObjectId } from 'mongoose';
 
 export default async function JokePage({ params }) {
     const body = await params;
+    !isValidObjectId(body.jokeId) && notFound();
+
     await connectToDatabase();
     const joke = await Joke.findById(body.jokeId)
         .populate({

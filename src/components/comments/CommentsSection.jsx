@@ -75,7 +75,6 @@ export const CommentsSection = ({ joke }) => {
             handleChange()
 
         } catch (error) {
-            console.log(error)
             setDeleteError({ comment: commentId, error: 'נראה כאילו יש תקלה. תנסה למחוק שוב מאוחר יותר' })
         } finally {
             setIsDeleting(false);

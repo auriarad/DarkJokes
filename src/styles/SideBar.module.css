@@ -5,12 +5,80 @@
     background-color: #1e2936;
     border-radius: 20px;
     padding: 18px;
-
     position: sticky;
     top: 0;
     height: 100vh;
     overflow-y: auto;
 }
+
+
+.menuButton {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #1e2936;
+    color: white;
+    border: none;
+    display: none;
+}
+
+.sideBarContent {
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+    border-radius: 0px 20px 20px 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Add mobile styles */
+@media (max-width: 775px) {
+
+    .InfiniteJokesList {
+        margin-right: 50px;
+    }
+
+    .container {
+        position: absolute;
+        height: 100%;
+        width: 50px;
+        max-width: 250px;
+        min-height: 740px;
+        z-index: 10;
+        transition: width 0.3s ease-in-out;
+    }
+
+    .container.open {
+        width: 90%;
+    }
+
+    .overlay.open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .sideBarContent {
+        display: none;
+    }
+
+    .sideBarContent.open {
+        display: block;
+    }
+
+    .menuButton {
+        display: block;
+    }
+
+}
+
+
 
 .form {
     display: flex;
@@ -22,7 +90,6 @@
 .form input,
 .form select {
     margin-bottom: 1.5rem;
-    font-family: 'Abraham';
     color: aliceblue;
     border: 1px solid white;
     padding: 3px;
@@ -43,8 +110,6 @@
     width: 100%;
 }
 
-.form select {}
-
 .reverse {
     margin: 0;
     padding: 0;
@@ -64,6 +129,8 @@
 }
 
 .categoriesGrid {
+    font-size: 100px;
+    position: absolute;
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 10px;
@@ -71,8 +138,22 @@
     justify-items: start;
 }
 
+.categorieButt {
+    font-size: 18px;
+}
+
+@media (max-width: 900px) {
+    .categoriesGrid {
+        gap: 5px 0px;
+    }
+
+    .container {
+        padding: 5px;
+    }
+}
+
+
 .categoriesGrid button {
-    font-family: 'Abraham';
     background: none;
     border: none;
 }

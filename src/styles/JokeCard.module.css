@@ -18,7 +18,7 @@
 }
 
 .jokeTitle {
-    margin: 5px;
+    margin: 5px 0px;
     font-size: 1.3em;
     font-weight: 400;
 }
@@ -34,28 +34,19 @@
     margin-top: 12px;
 }
 
-.collapse {
-    overflow: hidden;
-    visibility: hidden;
-    opacity: 0;
-    max-height: 0;
-    margin-top: 5px;
-    white-space: pre-wrap;
-    transition: all 0.5s ease;
-}
-
-.collapse.show {
-    visibility: visible;
-    opacity: 1;
-    max-height: 1000px;
+.ratingSpot {
+    margin-left: 15px;
+    flex: 0 0 35px;
+    display: flex;
+    justify-content: center;
 }
 
 .staticRating {
-    flex: 0 0 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
 }
 
 .errorMessage {
@@ -106,4 +97,58 @@
 
 .link:hover::after {
     width: 0;
+}
+
+.adminButtonGroup {
+    display: inline-flex;
+    flex-direction: row;
+    margin-top: 15px;
+}
+
+.collapse {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    margin-top: 5px;
+    white-space: pre-wrap;
+    transition: all 0.5s ease;
+}
+
+.collapse.show {
+    visibility: visible;
+    opacity: 1;
+    max-height: 1000px;
+}
+
+
+@media screen and (max-width: 580px) {
+    .categoryList {
+        gap: 3px;
+    }
+
+    .ratingSpot {
+        margin: 0;
+    }
+
+    .jokeTitle {
+        font-size: 1em;
+    }
+
+    .jokeBody {
+        font-size: 0.95em;
+    }
+
+    .link {
+        font-size: 14px;
+
+    }
+
+    .adminButtonGroup {
+        scale: 0.65;
+        transform-origin: top right;
+        margin-bottom: -6%;
+    }
 }

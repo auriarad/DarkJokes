@@ -24,7 +24,7 @@ export default async function AdminPage() {
 
     return (
         <div>
-            <h1>Admin Dashboard</h1>
+            <h1>הי לך {admin.username}👑</h1>
             <AdminJokeList initialJokes={JSON.parse(JSON.stringify(initialJokes))} />
         </div>
     );

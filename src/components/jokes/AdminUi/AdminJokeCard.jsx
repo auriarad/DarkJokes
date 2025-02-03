@@ -79,7 +79,7 @@ export const AdminJokeCard = ({ joke, after }) => {
                 <div className={`${styles.collapse} ${isExpanded ? styles.show : ''}`}>
                     {joke.body}
                     <br />
-                    <div id="buttons" style={{ display: 'inline-flex', flexDirection: 'row', marginTop: '15px' }}>
+                    <div id="buttons" className={styles.adminButtonGroup}>
                         <DefaultButton
                             disabled={isSubmitting}
                             variant="purple"

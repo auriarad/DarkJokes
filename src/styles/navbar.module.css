@@ -8,17 +8,9 @@
 }
 
 
-.navItems {}
 
-@media (max-width: 768px) {
+@media (max-width: 500px) {
     .navbar {
-        flex-direction: column;
-        padding: 1rem;
-    }
-
-    .navItems {
-        margin-top: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
+        padding: 0px 8px;
     }
 }

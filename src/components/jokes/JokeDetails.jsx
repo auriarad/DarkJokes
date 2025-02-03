@@ -9,7 +9,8 @@ import { EditForm } from './AdminUi/EditForm';
 import { useRouter } from 'next/navigation'
 
 export default function JokeDetails({ joke }) {
-    const { isAdmin, loading, reCheck } = useAdmin();
+    const { isAdmin } = useAdmin();
+
     const [isEditing, setIsEditing] = useState(false);
     const [body, setBody] = useState(joke.body);
     const [title, setTitle] = useState(joke.title);

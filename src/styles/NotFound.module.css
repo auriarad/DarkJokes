@@ -1,0 +1,29 @@
+.videoContainer {
+    margin: auto;
+    width: 500px;
+    max-width: 70%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1.6;
+}
+
+.video {
+    width: 100vh;
+    max-width: 950px;
+}
+
+.notFound h1 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 7em;
+}
+
+.notFound h2 {
+    text-align: center;
+}
+
+.notFound p {
+    text-align: center;
+}

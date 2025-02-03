@@ -1,9 +1,14 @@
 import styles from '@/styles/footer.module.css';
-
+import Link from 'next/link';
 export default function Footer() {
     return (
         <footer className={styles.footer}>
-            <p>© {new Date().getFullYear()} Dark Jokes - All rights reserved</p>
+            <small>אמא שלך כל כך שמנה שכל הזכויות שמורות לה© {new Date().getFullYear()}</small>
+            <div>
+                <small>נחספת באתר לתוכן פוגעני או בלתי הולם?</small>
+                <br />
+                <Link href={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}>דווח</Link>
+            </div>
         </footer>
     );
 }

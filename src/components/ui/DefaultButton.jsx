@@ -9,7 +9,8 @@ export default function DefaultButton({
     onLongPress,
     disabled = false,
     type = 'button',
-    variant = 'blue'
+    variant = 'blue',
+    style
 }) {
     const [isPressed, setIsPressed] = useState(false);
 
@@ -50,6 +51,7 @@ export default function DefaultButton({
 
     return (
         <button
+            style={style}
             {...buttonEvents}
             disabled={disabled}
             type={type}

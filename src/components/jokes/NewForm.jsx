@@ -112,9 +112,14 @@ export const NewForm = () => {
                 <div style={{ marginBottom: "10px" }} className={styles.errorMessage}> <p style={{ fontSize: "1.15em" }}>{submitError}</p></div>
             )}
 
-            <DefaultButton type="submit" disabled={isSubmitting}>
+            <DefaultButton
+                style={{ margin: "auto" }}
+                type="submit"
+                disabled={isSubmitting}
+            >
                 {isSubmitting ? 'שולח...' : 'שלח בדיחה'}
             </DefaultButton>
+
         </form>
     );
 }

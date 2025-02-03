@@ -16,6 +16,5 @@ export default async function RandomJoke() {
         throw new Error("בדיחה לא נמצאה");
     }
 
-    console.log(joke);
     redirect(`/jokes/${joke._id}`);
 }

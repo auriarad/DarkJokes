@@ -5,3 +5,27 @@
     border-radius: 0px 0px 20px 20px;
     margin-bottom: 20px;
 }
+
+@media (max-width: 520px) {
+    .openning h1 {
+        font-size: 1.5em;
+    }
+}
+
+.section {
+    display: flex;
+    position: relative;
+    min-height: 740px;
+}
+
+.InfiniteJokesList {
+    flex: 1;
+    transition: margin-right 0.3s ease-in-out;
+}
+
+@media (max-width: 775px) {
+    .InfiniteJokesList {
+        margin-right: 50px;
+    }
+
+}

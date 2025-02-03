@@ -32,7 +32,6 @@ export default function AdminLoginModal({ onClose }) {
                 setLoginError(result.error || 'התחברות נכשלה');
             }
         } catch (error) {
-            // console.error('Login error:', error);
             setLoginError('נראה כאילו משהו השתבש');
         }
     };
@@ -71,7 +70,7 @@ export default function AdminLoginModal({ onClose }) {
                     </div>
 
                     <div className={formStyles.formRow}>
-                        <label htmlFor="password">גוף הבדיחה</label>
+                        <label htmlFor="password">ססמא</label>
                         <input
                             id='password'
                             placeholder="12345678"

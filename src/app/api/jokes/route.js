@@ -45,7 +45,6 @@ export async function GET(request) {
         let jokes = null;
         if (sort === "comments") {
             const sortByNum = sortOrder === 'descending' ? -1 : 1
-            console.log(sortByNum)
 
             jokes = await Joke.aggregate([
                 { $match: query },

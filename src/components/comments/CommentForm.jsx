@@ -76,7 +76,7 @@ export const CommentForm = ({ jokeId, handleChange, clientId }) => {
                 {submitError && <p className={styles.errorMessage}>{submitError}</p>}
 
             </div>
-            <button disabled={isSubmitting} className={styles.plusButton}>+</button>
+            <button disabled={isSubmitting} className={styles.addBtn}></button>
         </form>
     )
 }

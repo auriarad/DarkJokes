@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useEffect, useState } from 'react';
 import { AdminJokeCard } from './AdminJokeCard';
 import styles from '@/styles/AdminPage.module.css'
+import { LoadingDots } from '../../ui/LoadingDots';
 
 export default function AdminJokeList({ initialJokes }) {
 
@@ -74,7 +75,7 @@ export default function AdminJokeList({ initialJokes }) {
         return <p>זהו! אין עוד</p>
     }
     return (
-        <section style={{ display: "flex", flexDirection: "column", width: '50%' }}>
+        <section className={styles.jokesSection}>
             <input
                 className={styles.search}
                 type="text"
@@ -86,7 +87,7 @@ export default function AdminJokeList({ initialJokes }) {
                 dataLength={jokes.length}
                 next={fetchMoreJokes}
                 hasMore={hasMore}
-                loader={<p>Loading...</p>}
+                loader={<LoadingDots />}
                 endMessage={endMessageClc()}
                 scrollThreshold={0.95}
             >
