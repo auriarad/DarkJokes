@@ -4,12 +4,7 @@ import Styles from "@/styles/homePage.module.css"
 import { MessageModal } from '@/components/ui/MessageModal';
 import JokeList from '@/components/jokes/JokesList';
 
-export default async function Home() {
-  await connectToDatabase();
-  const initialJokes = await Joke.find({ approved: true })
-    .sort({ _id: -1 })
-    .limit(10);
-
+export default async function Home({ initialJokes }) {
   return (
     <>
       <div className={Styles.openning}>
@@ -17,7 +12,7 @@ export default async function Home() {
         <p>אחרי שנים של איסוף ומיון קפדני, פה ניתן למצוא את לקט הבדיחות הכי נוראיות והכי אפלות שנאמרו בשפה העברית</p>
       </div>
 
-      <JokeList initialJokes={JSON.parse(JSON.stringify(initialJokes))} />
+      <JokeList initialJokes={initialJokes} />
 
       <MessageModal message="jokeSubmissionSuccess">
         <h2>תודה על תרומתך הצנועה למאגר!</h2>
@@ -25,4 +20,15 @@ export default async function Home() {
       </MessageModal>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  await connectToDatabase();
+  const jokes = await Joke.find({ approved: true }).sort({ _id: -1 }).limit(10);
+
+  return {
+    props: {
+      initialJokes: JSON.parse(JSON.stringify(jokes))
+    },
+  };
 }
