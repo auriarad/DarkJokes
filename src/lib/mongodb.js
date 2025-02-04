@@ -13,8 +13,6 @@ if (!cached) {
 }
 
 async function connectToDatabase() {
-    // await new Promise((resolve) => setTimeout(resolve, 1500));
-
     if (cached.conn) {
         return cached.conn;
     }

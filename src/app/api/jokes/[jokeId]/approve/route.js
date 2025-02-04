@@ -5,6 +5,8 @@ import Admin from '@/models/admin';
 
 export async function POST(request, { params }) {
     try {
+        await connectToDatabase()
+
         const session = await getAdminSession(request.cookies.get('adminSession')?.value);
         if (!session?.adminId) {
             return Response.json({ success: false, error: "נו באמת לא חשבת שזה יהיה כזה קל" }, { status: 401 });

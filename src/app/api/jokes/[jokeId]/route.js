@@ -24,6 +24,7 @@ export async function GET(request, { params }) {
 
 export async function PATCH(request, { params }) {
     try {
+        await connectToDatabase();
         //check admin
         const session = await getAdminSession(request.cookies.get('adminSession')?.value);
         if (!session?.adminId) {
@@ -34,7 +35,6 @@ export async function PATCH(request, { params }) {
             return Response.json({ success: false, error: "נו באמת לא חשבת שזה יהיה כזה קל" }, { status: 401 });
         }
 
-        await connectToDatabase();
         const { title, body } = await request.json();
         const { jokeId } = await params;
 
@@ -59,6 +59,7 @@ export async function PATCH(request, { params }) {
 
 export async function DELETE(request, { params }) {
     try {
+        await connectToDatabase();
         //check admin
         const session = await getAdminSession(request.cookies.get('adminSession')?.value);
         if (!session?.adminId) {
@@ -69,7 +70,6 @@ export async function DELETE(request, { params }) {
             return Response.json({ success: false, error: "נו באמת לא חשבת שזה יהיה כזה קל" }, { status: 401 });
         }
 
-        await connectToDatabase();
         const { jokeId } = await params;
         const deletedJoke = await Joke.findByIdAndDelete(jokeId);
 

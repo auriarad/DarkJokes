@@ -5,7 +5,6 @@ import { cookies } from 'next/headers'
 import connectToDatabase from '@/lib/mongodb';
 import Joke from '@/models/Joke';
 import AdminJokeList from '@/components/jokes/AdminUi/AdminJokeList';
-import Analytics from '@/components/ui/Analytics';
 
 export default async function AdminPage() {
     const cookieStore = await cookies()
@@ -26,7 +25,6 @@ export default async function AdminPage() {
     return (
         <div>
             <h1>הי לך {admin.username}👑</h1>
-            <Analytics />
             <AdminJokeList initialJokes={JSON.parse(JSON.stringify(initialJokes))} />
         </div>
     );

@@ -6,7 +6,7 @@ import connectToDatabase from '@/lib/mongodb';
 
 export async function POST(req) {
     try {
-        connectToDatabase()
+        await connectToDatabase()
 
         const { username, password } = await req.json();
         const admin = await Admin.findOne({ username });

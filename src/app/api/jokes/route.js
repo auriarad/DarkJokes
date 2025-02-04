@@ -83,6 +83,8 @@ export async function GET(request) {
 
 export async function POST(request) {
     try {
+        await connectToDatabase();
+
         let approved = false
         //check admin
         const session = await getAdminSession(request.cookies.get('adminSession')?.value);
@@ -95,7 +97,6 @@ export async function POST(request) {
 
 
 
-        await connectToDatabase();
         const { title, body, categories } = await request.json();
 
         const newJoke = new Joke({

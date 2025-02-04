@@ -1,5 +1,4 @@
 import { Analytics } from "@vercel/analytics/react"
-import { GoogleAnalytics } from '@next/third-parties/google'
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import styles from '@/styles/layout.module.css';
@@ -16,9 +15,6 @@ export default async function RootLayout({ children }) {
           <main className={styles.main}>{children}</main>
           <Footer />
         </div>
-        <GoogleAnalytics
-          gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}
-        />
         <Analytics />
       </body>
     </html >

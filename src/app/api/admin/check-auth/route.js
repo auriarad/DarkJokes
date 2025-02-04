@@ -1,8 +1,11 @@
 import { getAdminSession } from '@/lib/session';
 import Admin from '@/models/admin';
+import connectToDatabase from '@/lib/mongodb';
 
 export async function GET(req) {
     try {
+        await connectToDatabase()
+
         const session = await getAdminSession(req.cookies.get('adminSession')?.value);
 
         if (!session?.adminId) {

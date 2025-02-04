@@ -7,6 +7,7 @@ import { headers } from 'next/headers'
 
 export async function DELETE(request, { params }) {
     try {
+        await connectToDatabase();
         //check admin
         let adminAprove = false
         const session = await getAdminSession(request.cookies.get('adminSession')?.value);
@@ -19,7 +20,6 @@ export async function DELETE(request, { params }) {
         const headersList = await headers()
         const clientId = headersList.get('ClientId')
 
-        await connectToDatabase();
         const { jokeId, commentId } = await params;
         const comment = await Comment.findById(commentId);
 
