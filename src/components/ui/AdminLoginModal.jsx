@@ -11,7 +11,6 @@ export default function AdminLoginModal({ onClose }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [loginError, setLoginError] = useState('');
     const [loading, setLoading] = useState(false);
-    const textRegex = /^[\p{L}\p{N}\p{S}\p{P}\s]+$/u;
 
     const onSubmit = async (data) => {
         try {

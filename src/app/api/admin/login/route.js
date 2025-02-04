@@ -2,9 +2,12 @@ import Admin from '@/models/admin';
 import bcrypt from 'bcryptjs';
 import { createAdminSession } from '@/lib/session';
 import { NextResponse } from 'next/server';
+import connectToDatabase from '@/lib/mongodb';
 
 export async function POST(req) {
     try {
+        connectToDatabase()
+
         const { username, password } = await req.json();
         const admin = await Admin.findOne({ username });
 

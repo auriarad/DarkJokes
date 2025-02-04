@@ -1,7 +1,7 @@
 .jokesSection {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
 }
 
 
@@ -24,12 +24,3 @@
     margin-top: 0.25rem;
     display: block;
 }
-
-
-@media screen and (max-width: 580px) {
-    .jokesSection {
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 300px) {}
