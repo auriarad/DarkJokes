@@ -63,7 +63,7 @@ export const EditForm = ({ jokeState, jokeId, cancelEdit, updateJokeState }) => 
                 {...register("title", {
                     required: "סליחה אחי חייב כותרת",
                     maxLength: {
-                        value: 55,
+                        value: 65,
                         message: "הכותרת יכולה להכיל עד 55 תווים"
                     },
                     pattern: {
@@ -86,7 +86,7 @@ export const EditForm = ({ jokeState, jokeId, cancelEdit, updateJokeState }) => 
                     required: "בדיחה בלי בדיחה בדרך כלל לא מצחיקה",
                     maxLength: {
                         value: 300,
-                        message: "גוף הבדיחה יכול להכיל עד 300 תווים"
+                        message: "גוף הבדיחה יכול להכיל עד 350 תווים"
                     },
                     pattern: {
                         value: /^[\p{L}\p{N}\p{P}\s]+$/u,
