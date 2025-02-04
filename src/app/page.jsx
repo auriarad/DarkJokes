@@ -4,17 +4,14 @@ import Styles from "@/styles/homePage.module.css"
 import { MessageModal } from '@/components/ui/MessageModal';
 import JokeList from '@/components/jokes/JokesList';
 
-async function getJokes() {
+export const dynamic = 'force-dynamic'
+
+export default async function Home() {
   await connectToDatabase();
   const initialJokes = await Joke.find({ approved: true })
     .sort({ _id: -1 })
     .limit(10);
-  return JSON.parse(JSON.stringify(initialJokes));
-}
 
-
-export default async function Home() {
-  const initialJokes = await getJokes();
   return (
     <>
       <div className={Styles.openning}>
@@ -22,7 +19,7 @@ export default async function Home() {
         <p>אחרי שנים של איסוף ומיון קפדני, פה ניתן למצוא את לקט הבדיחות הכי נוראיות והכי אפלות שנאמרו בשפה העברית</p>
       </div>
 
-      <JokeList initialJokes={initialJokes} />
+      <JokeList initialJokes={JSON.parse(JSON.stringify(initialJokes))} />
 
       <MessageModal message="jokeSubmissionSuccess">
         <h2>תודה על תרומתך הצנועה למאגר!</h2>
@@ -31,4 +28,3 @@ export default async function Home() {
     </>
   );
 }
-
