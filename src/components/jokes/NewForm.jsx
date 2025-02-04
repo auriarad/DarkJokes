@@ -62,7 +62,7 @@ export const NewForm = () => {
                         required: "סליחה אחי חייב כותרת",
                         maxLength: {
                             value: 65,
-                            message: "הכותרת יכולה להכיל עד 55 תווים"
+                            message: "הכותרת יכולה להכיל עד 65 תווים"
                         },
                         pattern: {
                             value: /^[\p{L}\p{N}\p{P}\s]+$/u,
@@ -85,7 +85,7 @@ export const NewForm = () => {
                     {...register("body", {
                         required: "בדיחה בלי בדיחה בדרך כלל לא מצחיקה",
                         maxLength: {
-                            value: 300,
+                            value: 350,
                             message: "גוף הבדיחה יכול להכיל עד 350 תווים"
                         },
                         pattern: {
