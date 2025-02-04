@@ -65,7 +65,7 @@ export const NewForm = () => {
                             message: "הכותרת יכולה להכיל עד 55 תווים"
                         },
                         pattern: {
-                            value: /^[\p{L}\p{N}\s]+$/u,
+                            value: /^[\p{L}\p{N}\p{P}\s]+$/u,
                             message: "בלי מקשים מיוחדים בבקשה"
                         }
 
@@ -89,7 +89,7 @@ export const NewForm = () => {
                             message: "גוף הבדיחה יכול להכיל עד 300 תווים"
                         },
                         pattern: {
-                            value: /^[\p{L}\p{N}\s]+$/u,
+                            value: /^[\p{L}\p{N}\p{P}\s]+$/u,
                             message: "בלי מקשים מיוחדים בבקשה"
                         }
                     })}

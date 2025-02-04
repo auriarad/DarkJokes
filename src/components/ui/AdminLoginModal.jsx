@@ -63,7 +63,7 @@ export default function AdminLoginModal({ onClose }) {
                             {...register("username", {
                                 required: "חובה שם משתמש אחי",
                                 pattern: {
-                                    value: /^[\p{L}\p{N}\s]+$/u,
+                                    value: /^[\p{L}\p{N}\p{P}\s]+$/u,
                                     message: "בלי מקשים מיוחדים בבקשה"
                                 }
                             })}
@@ -82,7 +82,7 @@ export default function AdminLoginModal({ onClose }) {
                             {...register("password", {
                                 required: "איך תתחבר בלי ססמא יה מפגר",
                                 pattern: {
-                                    value: /^[\p{L}\p{N}\s]+$/u,
+                                    value: /^[\p{L}\p{N}\p{P}\s]+$/u,
                                     message: "בלי מקשים מיוחדים בבקשה"
                                 }
                             })}

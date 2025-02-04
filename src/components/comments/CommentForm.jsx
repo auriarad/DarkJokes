@@ -50,7 +50,12 @@ export const CommentForm = ({ jokeId, handleChange, clientId }) => {
                         maxLength: {
                             value: 25,
                             message: "שם קצת ארוך לא?"
+                        },
+                        pattern: {
+                            value: /^[\p{L}\p{N}\p{P}\s]+$/u,
+                            message: "בלי מקשים מיוחדים בבקשה"
                         }
+
                     })}
                 />
                 {errors.name && (
@@ -66,6 +71,10 @@ export const CommentForm = ({ jokeId, handleChange, clientId }) => {
                         maxLength: {
                             value: 300,
                             message: "יה מגזים תקצר טיפה"
+                        },
+                        pattern: {
+                            value: /^[\p{L}\p{N}\p{P}\s]+$/u,
+                            message: "בלי מקשים מיוחדים בבקשה"
                         }
                     })}
                 />
