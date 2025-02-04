@@ -4,7 +4,17 @@ import Styles from "@/styles/homePage.module.css"
 import { MessageModal } from '@/components/ui/MessageModal';
 import JokeList from '@/components/jokes/JokesList';
 
-export default async function Home({ initialJokes }) {
+async function getJokes() {
+  await connectToDatabase();
+  const initialJokes = await Joke.find({ approved: true })
+    .sort({ _id: -1 })
+    .limit(10);
+  return JSON.parse(JSON.stringify(initialJokes));
+}
+
+
+export default async function Home() {
+  const initialJokes = await getJokes();
   return (
     <>
       <div className={Styles.openning}>
@@ -22,13 +32,3 @@ export default async function Home({ initialJokes }) {
   );
 }
 
-export async function getServerSideProps() {
-  await connectToDatabase();
-  const jokes = await Joke.find({ approved: true }).sort({ _id: -1 }).limit(10);
-
-  return {
-    props: {
-      initialJokes: JSON.parse(JSON.stringify(jokes))
-    },
-  };
-}
