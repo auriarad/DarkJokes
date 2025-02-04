@@ -23,6 +23,12 @@
 
 }
 
+.selectedBox.edit {
+    background: rgba(255, 255, 255, 0.075);
+    color: white;
+    border-radius: 15px;
+}
+
 .tag {
     display: flex;
     align-items: center;
@@ -81,6 +87,11 @@
             #8da8c2 75%,
             #5b718a 95%);
 
+}
+
+.dropdown.edit {
+    background: #232939;
+    color: white;
 }
 
 .Ul {

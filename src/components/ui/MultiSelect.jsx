@@ -6,11 +6,12 @@ import { Search, X } from 'lucide-react';
 import styles from '@/styles/MultiSelect.module.css';
 
 const MultiSelect = ({
-    maxSelected = 3,
     name,
     control,
     options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'],
-    rules
+    rules,
+    starting,
+    variant = 'new'
 }) => {
     const {
         field: { value, onChange },
@@ -35,12 +36,13 @@ const MultiSelect = ({
     );
 
     useEffect(() => {
+
         const handleClickOutside = (event) => {
             if (containerRef.current && !containerRef.current.contains(event.target)) {
                 setIsOpen(false);
             }
         };
-
+        onChange(starting)
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
@@ -92,7 +94,7 @@ const MultiSelect = ({
 
     return (
         <div className={styles.container} ref={containerRef}>
-            <div className={styles.selectedBox} onClick={() => inputRef.current?.focus()}>
+            <div className={`${styles.selectedBox} ${styles[variant]}`} onClick={() => inputRef.current?.focus()}>
                 {value.map((item) => (
                     <span key={item} className={styles.tag}>
                         #{item}
@@ -127,7 +129,7 @@ const MultiSelect = ({
             </div>
 
             {isOpen && (
-                <div className={styles.dropdown}>
+                <div className={`${styles.dropdown} ${styles[variant]}`}>
                     {filteredOptions.length > 0 ? (
                         <ul className={styles.Ul}>
                             {filteredOptions.map((option, index) => (

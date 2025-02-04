@@ -3,9 +3,11 @@ import styles from '@/styles/EditForm.module.css'
 import DefaultButton from '../../ui/DefaultButton';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import MultiSelect from '@/components/ui/MultiSelect';
+import { categories } from '../../../../public/categories';
 
-export const EditForm = ({ title, body, jokeId, cancelEdit, updateJokeState }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+export const EditForm = ({ jokeState, jokeId, cancelEdit, updateJokeState }) => {
+    const { register, handleSubmit, control, formState: { errors } } = useForm();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState('');
 
@@ -36,11 +38,28 @@ export const EditForm = ({ title, body, jokeId, cancelEdit, updateJokeState }) =
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
+            <MultiSelect
+                name="categories"
+                control={control}
+                options={categories}
+                starting={jokeState.categories}
+                variant='edit'
+                rules={{
+                    required: 'בבקשה תבחר לפחות קטגוריה אחת',
+                    validate: {
+                        maxLength: (value) => value.length <= 3 || 'ניתן לבחור עד 3 קטגוריות בלבד'
+                    }
+                }}
+            />
+            {errors.categories && (
+                <span className={styles.errorMessage}>{errors.categories.message}</span>
+            )}
+
             <input
                 className={styles.titleEdit}
                 type="text"
                 id='titleInput'
-                defaultValue={title}
+                defaultValue={jokeState.title}
                 {...register("title", {
                     required: "סליחה אחי חייב כותרת",
                     maxLength: {
@@ -61,7 +80,7 @@ export const EditForm = ({ title, body, jokeId, cancelEdit, updateJokeState }) =
             <TextareaAutosize
                 className={styles.bodyEdit}
                 minRows={3}
-                defaultValue={body}
+                defaultValue={jokeState.body}
                 onChange={(e) => setBody(e.target.value)}
                 {...register("body", {
                     required: "בדיחה בלי בדיחה בדרך כלל לא מצחיקה",

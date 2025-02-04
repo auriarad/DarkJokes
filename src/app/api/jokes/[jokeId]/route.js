@@ -35,12 +35,12 @@ export async function PATCH(request, { params }) {
             return Response.json({ success: false, error: "נו באמת לא חשבת שזה יהיה כזה קל" }, { status: 401 });
         }
 
-        const { title, body } = await request.json();
+        const { title, body, categories } = await request.json();
         const { jokeId } = await params;
 
         const updatedJoke = await Joke.findByIdAndUpdate(
             jokeId,
-            { title, body },
+            { title, body, categories },
             { new: true }
         );
 

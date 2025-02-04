@@ -7,13 +7,13 @@ import useAdmin from '@/hooks/useAdmin';
 import DefaultButton from '../ui/DefaultButton';
 import { EditForm } from './AdminUi/EditForm';
 import { useRouter } from 'next/navigation'
+import CategoryBadge from './CategoriesBadge';
 
 export default function JokeDetails({ joke }) {
     const { isAdmin } = useAdmin();
 
     const [isEditing, setIsEditing] = useState(false);
-    const [body, setBody] = useState(joke.body);
-    const [title, setTitle] = useState(joke.title);
+    const [jokeState, setJokeState] = useState({ title: joke.title, body: joke.body, categories: joke.categories });
 
     const [currentRating, setCurrentRating] = useState(joke.rating);
     const [userVote, setUserVote] = useState(null);
@@ -62,9 +62,8 @@ export default function JokeDetails({ joke }) {
     }
 
     const updateJokeState = (data) => {
-        const { body, title } = data;
-        setBody(body);
-        setTitle(title);
+        const { body, title, categories } = data;
+        setJokeState({ title, body, categories });
         setIsEditing(false);
     }
 
@@ -96,15 +95,19 @@ export default function JokeDetails({ joke }) {
                 {isEditing ? (
                     <EditForm
                         jokeId={joke._id}
-                        title={title}
-                        body={body}
+                        jokeState={jokeState}
                         cancelEdit={cancelEdit}
                         updateJokeState={updateJokeState}
                     />
                 ) : (
                     <>
-                        <h1>{title}</h1>
-                        <p>{body}</p>
+                        {jokeState.categories.map(category => (
+                            <span key={category} style={{ marginLeft: '6px' }}>
+                                <CategoryBadge>#{category}</CategoryBadge>
+                            </span>
+                        ))}
+                        <h1>{jokeState.title}</h1>
+                        <p>{jokeState.body}</p>
                     </>
                 )}
 
