@@ -5,7 +5,7 @@ export default function Footer() {
         <footer className={styles.footer}>
             <small>אמא שלך כל כך שמנה שכל הזכויות שמורות לה© {new Date().getFullYear()}</small>
             <div>
-                <small>נחספת באתר לתוכן פוגעני או בלתי הולם?</small>
+                <small>נחשפת באתר לתוכן פוגעני או בלתי הולם?</small>
                 <br />
                 <Link href={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}>דווח</Link>
             </div>
