@@ -15,7 +15,8 @@ export default function JokeDetails({ joke }) {
     const [isEditing, setIsEditing] = useState(false);
     const [jokeState, setJokeState] = useState({ title: joke.title, body: joke.body, categories: joke.categories });
 
-    const [currentRating, setCurrentRating] = useState(joke.rating);
+    const [currentRatingUp, setCurrentRatingUp] = useState(joke.ratingUp);
+    const [currentRatingDown, setCurrentRatingDown] = useState(joke.ratingDown);
     const [userVote, setUserVote] = useState(null);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,32 +30,39 @@ export default function JokeDetails({ joke }) {
         setUserVote(existingVote?.voteType || "");
     }, [joke.voters]);
 
+
     const handleVoteClick = async (e, voteType) => {
         e.stopPropagation();
-
         try {
+            // Optimistic update
             const previousVote = userVote;
-            setUserVote(voteType === userVote ? "" : voteType);
+            const newVote = voteType === userVote ? "" : voteType;
+            setUserVote(newVote);
 
-            const newRating = currentRating + calculateRatingChange(previousVote, voteType);
-            setCurrentRating(newRating);
+            if (previousVote === 'up') {
+                setCurrentRatingUp(curr => curr - 1);
+            } else if (previousVote === 'down') {
+                setCurrentRatingDown(curr => curr - 1);
+            }
 
+            if (newVote === 'up') {
+                setCurrentRatingUp(curr => curr + 1);
+            } else if (newVote === 'down') {
+                setCurrentRatingDown(curr => curr + 1);
+            }
+
+            // Send to API
             const result = await handleVote(joke._id, voteType);
-            setCurrentRating(result.newRating);
-        } catch (error) {
-            setUserVote(previousVote);
-            setCurrentRating(joke.rating);
-        }
-    };
 
-    const calculateRatingChange = (previousVote, newVote) => {
-        if (previousVote === newVote) {
-            return previousVote === 'up' ? -1 : 1;
+            setCurrentRatingUp(result.newRatingUp);
+            setCurrentRatingDown(result.newRatingDown);
+
+        } catch (error) {
+            // Rollback on error
+            setUserVote(previousVote);
+            setCurrentRatingUp(result.ratingUp);
+            setCurrentRatingDown(result.ratingDown);
         }
-        if (!previousVote) {
-            return newVote === 'up' ? 1 : -1;
-        }
-        return newVote === 'up' ? 2 : -2;
     };
 
     const cancelEdit = () => {
@@ -139,7 +147,7 @@ export default function JokeDetails({ joke }) {
             </div>
 
             <div className={styles.rating}>
-                <DynamicRating size={1.3} rating={currentRating} handleVote={handleVoteClick} vote={userVote} />
+                <DynamicRating size={1.3} ratingUp={currentRatingUp} ratingDown={currentRatingDown} handleVote={handleVoteClick} vote={userVote} />
             </div>
         </div>
     );

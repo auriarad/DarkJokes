@@ -45,7 +45,6 @@ export async function GET(request) {
         let jokes = null;
         if (sort === "comments") {
             const sortByNum = sortOrder === 'descending' ? -1 : 1
-
             jokes = await Joke.aggregate([
                 { $match: query },
                 {
@@ -62,8 +61,64 @@ export async function GET(request) {
                 { $skip: skip },
                 { $limit: 10 }
             ]);
-        }
-        else {
+        } else if (sort === "controversial") {
+            const sortByNum = sortOrder === 'descending' ? -1 : 1;
+
+            jokes = await Joke.aggregate([
+                { $match: query },
+                {
+                    $addFields: {
+                        controversiality: {
+                            $cond: {
+                                if: { $gt: [{ $add: ["$ratingUp", "$ratingDown"] }, 0] }, // Avoid division by zero
+                                then: {
+                                    $divide: [
+                                        {
+                                            $pow: [
+                                                { $min: ["$ratingUp", "$ratingDown"] },
+                                                2
+                                            ]
+                                        },
+                                        { $add: ["$ratingUp", "$ratingDown"] }
+                                    ]
+                                },
+                                else: 0
+                            }
+                        },
+                        totalVotes: { $add: ["$ratingUp", "$ratingDown"] } // Count of total ratings
+                    }
+                },
+                {
+                    $sort: {
+                        controversiality: sortByNum, // Highest controversiality first
+                        totalVotes: -1, // Rated jokes before unrated (descending order)
+                        _id: -1 // Consistent ordering for tie-breakers
+                    }
+                },
+                { $skip: skip },
+                { $limit: 10 }
+            ]);
+
+        } else if (sort === "rating") {
+            const sortByNum = sortOrder === 'descending' ? -1 : 1;
+
+            jokes = await Joke.aggregate([
+                { $match: query },
+                {
+                    $addFields: {
+                        ratingDifference: { $subtract: ["$ratingUp", "$ratingDown"] }
+                    }
+                },
+                {
+                    $sort: {
+                        ratingDifference: sortByNum,
+                        _id: -1
+                    }
+                },
+                { $skip: skip },
+                { $limit: 10 }
+            ]);
+        } else {
             jokes = await Joke.find(query)
                 .sort({ [sort]: sortOrder, '_id': -1 })
                 .skip(skip)

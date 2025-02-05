@@ -80,6 +80,7 @@ export default function SideBar({ handleSearch }) {
                                 <option value="createdAt">תאריך</option>
                                 <option value="rating">דירוג</option>
                                 <option value="comments">תגובות</option>
+                                <option value="controversial">שנוי במחלוקת</option>
                             </select>
                             <button
                                 type="button"

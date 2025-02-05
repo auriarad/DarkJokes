@@ -17,7 +17,11 @@ const jokeSchema = new Schema({
         required: true,
         enum: categories
     },
-    rating: {
+    ratingUp: {
+        type: Number,
+        default: 0,
+    },
+    ratingDown: {
         type: Number,
         default: 0,
     },
