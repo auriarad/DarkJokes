@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "@/styles/JokeCard.module.css"
 import Link from 'next/link';
 import CategoryBadge from "./CategoriesBadge";
@@ -12,6 +12,8 @@ export const JokeCard = ({ joke }) => {
     const [currentRatingUp, setCurrentRatingUp] = useState(joke.ratingUp);
     const [currentRatingDown, setCurrentRatingDown] = useState(joke.ratingDown);
     const [userVote, setUserVote] = useState(null);
+    const isVotingRef = useRef(false);
+    const [votingError, setVotingError] = useState('');
 
     // Check existing votes on mount
     useEffect(() => {
@@ -22,6 +24,10 @@ export const JokeCard = ({ joke }) => {
 
     const handleVoteClick = async (e, voteType) => {
         e.stopPropagation();
+        if (isVotingRef.current) return;
+
+        isVotingRef.current = true;
+
         try {
             // Optimistic update
             const previousVote = userVote;
@@ -43,14 +49,18 @@ export const JokeCard = ({ joke }) => {
             // Send to API
             const result = await handleVote(joke._id, voteType);
 
+            setVotingError("");
             setCurrentRatingUp(result.newRatingUp);
             setCurrentRatingDown(result.newRatingDown);
 
         } catch (error) {
             // Rollback on error
-            setUserVote(previousVote);
-            setCurrentRatingUp(result.ratingUp);
-            setCurrentRatingDown(result.ratingDown);
+            setVotingError(error.message);
+            setUserVote(userVote);
+            setCurrentRatingUp(currentRatingUp);
+            setCurrentRatingDown(currentRatingDown);
+        } finally {
+            isVotingRef.current = false;
         }
     };
 
@@ -111,7 +121,9 @@ export const JokeCard = ({ joke }) => {
                         </svg>
                     </div>
                     :
-                    <DynamicRating ratingUp={currentRatingUp} ratingDown={currentRatingDown} handleVote={handleVoteClick} vote={userVote} />
+                    <>
+                        <DynamicRating votingError={votingError} ratingUp={currentRatingUp} ratingDown={currentRatingDown} handleVote={handleVoteClick} vote={userVote} />
+                    </>
                 }
 
             </div>

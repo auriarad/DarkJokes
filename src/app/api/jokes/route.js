@@ -91,7 +91,7 @@ export async function GET(request) {
                 {
                     $sort: {
                         controversiality: sortByNum, // Highest controversiality first
-                        totalVotes: -1, // Rated jokes before unrated (descending order)
+                        totalVotes: sortByNum, // Rated jokes before unrated (descending order)
                         _id: -1 // Consistent ordering for tie-breakers
                     }
                 },

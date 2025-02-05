@@ -1,5 +1,5 @@
 import styles from '@/styles/dynamicRating.module.css'
-export const DynamicRating = ({ ratingUp, ratingDown, handleVote, vote, size = 1 }) => {
+export const DynamicRating = ({ votingError, ratingUp, ratingDown, handleVote, vote, size = 1 }) => {
 
     return (
         <div style={{ scale: size }} className={styles.container}>
@@ -20,6 +20,9 @@ export const DynamicRating = ({ ratingUp, ratingDown, handleVote, vote, size = 1
                 }
             </div>
             <small style={{ color: "gray" }}>({ratingDown})</small>
+            {votingError && (
+                <small style={{ color: "red", fontSize: "9px" }}>{votingError}</small>
+            )}
         </div>
     )
 }

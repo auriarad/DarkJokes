@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from '@/styles/JokeDetails.module.css'
 import { DynamicRating } from '@/components/jokes/DynamicRating';
 import { handleVote, getClientId } from "@/utils/voteService";
@@ -18,6 +18,8 @@ export default function JokeDetails({ joke }) {
     const [currentRatingUp, setCurrentRatingUp] = useState(joke.ratingUp);
     const [currentRatingDown, setCurrentRatingDown] = useState(joke.ratingDown);
     const [userVote, setUserVote] = useState(null);
+    const isVotingRef = useRef(false);
+    const [votingError, setVotingError] = useState('');
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState('');
@@ -33,6 +35,10 @@ export default function JokeDetails({ joke }) {
 
     const handleVoteClick = async (e, voteType) => {
         e.stopPropagation();
+        if (isVotingRef.current) return;
+
+        isVotingRef.current = true;
+
         try {
             // Optimistic update
             const previousVote = userVote;
@@ -54,14 +60,18 @@ export default function JokeDetails({ joke }) {
             // Send to API
             const result = await handleVote(joke._id, voteType);
 
+            setVotingError("");
             setCurrentRatingUp(result.newRatingUp);
             setCurrentRatingDown(result.newRatingDown);
 
         } catch (error) {
             // Rollback on error
-            setUserVote(previousVote);
-            setCurrentRatingUp(result.ratingUp);
-            setCurrentRatingDown(result.ratingDown);
+            setVotingError(error.message);
+            setUserVote(userVote);
+            setCurrentRatingUp(currentRatingUp);
+            setCurrentRatingDown(currentRatingDown);
+        } finally {
+            isVotingRef.current = false;
         }
     };
 
@@ -147,7 +157,7 @@ export default function JokeDetails({ joke }) {
             </div>
 
             <div className={styles.rating}>
-                <DynamicRating size={1.3} ratingUp={currentRatingUp} ratingDown={currentRatingDown} handleVote={handleVoteClick} vote={userVote} />
+                <DynamicRating size={1.3} votingError={votingError} ratingUp={currentRatingUp} ratingDown={currentRatingDown} handleVote={handleVoteClick} vote={userVote} />
             </div>
         </div>
     );
