@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import styles from '@/styles/layout.module.css';
@@ -16,6 +17,7 @@ export default async function RootLayout({ children }) {
           <Footer />
         </div>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html >
   );
