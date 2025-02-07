@@ -154,6 +154,9 @@ export default function JokeDetails({ joke }) {
                         {submitError && submitError}
                     </>
                 }
+                {isAdmin && (
+                    <small style={{ marginTop: '5px', color: 'gray' }}>הבדיחה אושרה ע"י {joke.approvedBy}</small>
+                )}
             </div>
 
             <div className={styles.rating}>

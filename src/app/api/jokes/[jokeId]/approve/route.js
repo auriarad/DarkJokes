@@ -17,7 +17,7 @@ export async function POST(request, { params }) {
         }
 
         const { jokeId } = await params;
-        const joke = await Joke.findByIdAndUpdate(jokeId, { approved: true });
+        const joke = await Joke.findByIdAndUpdate(jokeId, { approved: true, approvedBy: admin.username });
 
         return Response.json({ success: true, joke });
 

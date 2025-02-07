@@ -141,12 +141,14 @@ export async function POST(request) {
         await connectToDatabase();
 
         let approved = false
+        let approvedBy = "notApproved";
         //check admin
         const session = await getAdminSession(request.cookies.get('adminSession')?.value);
         if (session?.adminId) {
             const admin = await Admin.findById(session.adminId);
             if (!!admin) {
                 approved = true;
+                approvedBy = admin.username;
             }
         }
 
@@ -159,6 +161,7 @@ export async function POST(request) {
             body,
             categories,
             approved,
+            approvedBy
         });
 
         await newJoke.save();

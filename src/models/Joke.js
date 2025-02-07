@@ -50,6 +50,10 @@ const jokeSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    approvedBy: {
+        type: String,
+        required: true
+    }
 });
 
 jokeSchema.post('findOneAndDelete', async function (joke) {
